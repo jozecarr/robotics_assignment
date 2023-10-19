@@ -1,0 +1,2 @@
+pf_localisation:socspioneer
+-DCATKIN_DEVEL_PREFIX=/home/kpafg/ir_workspace/devel -DCMAKE_INSTALL_PREFIX=/home/kpafg/ir_workspace/install -G Unix Makefiles
