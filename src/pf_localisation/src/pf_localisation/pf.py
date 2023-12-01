@@ -156,11 +156,7 @@ class PFLocaliser(PFLocaliserBase):
         estimated_pose.orientation.x = sum(particle.orientation.x for particle in best_particles) / len(best_particles)
         estimated_pose.orientation.y = sum(particle.orientation.y for particle in best_particles) / len(best_particles)
         estimated_pose.orientation.z = sum(particle.orientation.z for particle in best_particles) / len(best_particles)
-        
-        sumcos = sum(cos(particle.orientation.w) for particle in best_particles)
-        sumsin = sum(sin(particle.orientation.w) for particle in best_particles)
-        estimated_pose.orientation.w = atan2(sumsin, sumcos)
-
+        estimated_pose.orientation.w = sum(particle.orientation.w for particle in best_particles) / len(best_particles)
 
         return estimated_pose
     pass
