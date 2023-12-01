@@ -8,6 +8,8 @@ import numpy as np
 from time import time
 import tf.transformations as transformations
 from .sensor_model import SensorModel
+from math import sin, cos, atan2
+
  
  
 class PFLocaliser(PFLocaliserBase):
@@ -154,7 +156,10 @@ class PFLocaliser(PFLocaliserBase):
         estimated_pose.orientation.x = sum(particle.orientation.x for particle in best_particles) / len(best_particles)
         estimated_pose.orientation.y = sum(particle.orientation.y for particle in best_particles) / len(best_particles)
         estimated_pose.orientation.z = sum(particle.orientation.z for particle in best_particles) / len(best_particles)
-        estimated_pose.orientation.w = sum(particle.orientation.w for particle in best_particles) / len(best_particles)
+        
+        sumcos = sum(cos(particle.orientation.w) for particle in best_particles)
+        sumsin = sum(sin(particle.orientation.w) for particle in best_particles)
+        estimated_pose.orientation.w = atan2(sumsin, sumcos)
 
 
         return estimated_pose
